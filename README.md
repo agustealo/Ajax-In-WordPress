@@ -1,7 +1,7 @@
-# AjaxInWP Bare-Metal Theme
+# AjaxInWP is a Bare-Metal WordPress Theming frameworke
 
 ## Overview
-AjaxInWP Bare-Metal is a minimalist WordPress theme designed to provide a clean slate for developers. It leverages Ajax for dynamic content loading, ensuring smooth transitions and an enhanced user experience. Ideal for developers looking for a lightweight, unstyled starting point for custom projects.
+AjaxInWP is the Bare-Metal version of the AjaxInWP Framework; a minimalist WordPress theme designed to provide a clean slate for developers. It leverages Ajax for dynamic content loading, ensuring smooth transitions and an enhanced user experience. Ideal for developers looking for a lightweight, unstyled starting point for custom projects.
 
 ## Features
 - **Ajax-Powered**: Dynamic content loading without page refreshes.
