@@ -1,6 +1,6 @@
 class AjaxinWP {
     constructor() {
-        this.isLoading = false; // Track loading state to prevent infinite loops
+        this.isLoading = false; // Track loading state to prevent multiple simultaneous loads
         this.initialize();
     }
 
@@ -46,12 +46,12 @@ class AjaxinWP {
         const loader = document.getElementById('loader');
         if (loader) {
             loader.style.opacity = '0';
-            setTimeout(() => loader.remove(), 500); // Duration should match CSS transition duration
+            setTimeout(() => loader.remove(), 500); // Match CSS transition duration
         }
     }
 
     loadContent(url, updateHistory = true) {
-        if (this.isLoading) return; // Prevent multiple simultaneous loads
+        if (this.isLoading) return;
 
         const container = this.getAjaxContainer();
         if (!container) {
@@ -59,19 +59,11 @@ class AjaxinWP {
             return;
         }
 
-        this.isLoading = true; // Set loading state
-
-        // Start fade out animation
+        this.isLoading = true;
         container.style.opacity = '0';
-
-        // Show loader animation
         this.showLoader();
 
-        fetch(url, {
-            headers: {
-                'X-WP-Nonce': ajaxinwp_params.nonce
-            }
-        })
+        fetch(url, { headers: { 'X-WP-Nonce': ajaxinwp_params.nonce } })
             .then(response => response.text())
             .then(html => {
                 const parser = new DOMParser();
@@ -80,18 +72,17 @@ class AjaxinWP {
                 if (ajaxContainerContent) {
                     setTimeout(() => {
                         container.innerHTML = ajaxContainerContent.innerHTML;
-                        this.initializeDropdowns(); // Reinitialize dropdowns
-                        this.updateActiveNavLinks(url); // Update active class on navigation links
-                        this.updateStateBasedOnPage(url); // Update state based on the current page
-                        this.focusContent(url); // Focus on content after loading
-                        // Start fade in animation after content has been updated
+                        this.initializeDropdowns();
+                        this.updateActiveNavLinks(url);
+                        this.updateStateBasedOnPage(url);
+                        this.focusContent(url);
                         container.style.opacity = '1';
-                        this.isLoading = false; // Reset loading state
-                    }, 500); // Adjust the delay to match your transition duration
+                        this.isLoading = false;
+                    }, 500);
                 } else {
                     console.error('ajax-container not found in fetched HTML.');
                     container.innerHTML = '<div class="alert alert-danger">Error loading content.</div>';
-                    this.isLoading = false; // Reset loading state
+                    this.isLoading = false;
                 }
                 if (updateHistory) {
                     window.history.pushState({}, '', url);
@@ -100,18 +91,15 @@ class AjaxinWP {
             .catch(() => {
                 console.error('Error loading content.');
                 container.innerHTML = '<div class="alert alert-danger">Error loading content.</div>';
-                // Start fade in animation even if there's an error to prevent a blank screen
                 container.style.opacity = '1';
-                this.isLoading = false; // Reset loading state
+                this.isLoading = false;
             })
             .finally(() => {
-                // Hide loader animation
                 this.hideLoader();
             });
     }
 
     initializeDropdowns() {
-        // Ensure that Bootstrap dropdowns work after AJAX content load
         const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
         dropdownToggles.forEach(toggle => {
             const dropdownMenu = toggle.nextElementSibling;
@@ -144,7 +132,6 @@ class AjaxinWP {
             }
         });
 
-        // Close dropdowns when clicking outside
         document.addEventListener('click', event => {
             if (!event.target.closest('.dropdown-menu') && !event.target.closest('.dropdown-toggle')) {
                 const openDropdowns = document.querySelectorAll('.dropdown-menu.show');
@@ -185,7 +172,7 @@ class AjaxinWP {
     isHomePage(url) {
         const homePages = [ajaxinwp_params.homeURL, ajaxinwp_params.homeURL + '/index.php', ajaxinwp_params.homeURL + '/home'];
         const urlObj = new URL(url);
-        const path = urlObj.pathname.replace(/\/$/, ''); // Remove trailing slash if present
+        const path = urlObj.pathname.replace(/\/$/, '');
         return homePages.includes(path) || path === '';
     }
 
@@ -198,9 +185,6 @@ class AjaxinWP {
         } else {
             masthead.style.display = 'none';
         }
-        
-        console.log(`Page URL: ${url}`);
-        // Example: Update a state variable, initialize a plugin, etc.
     }
 }
 
