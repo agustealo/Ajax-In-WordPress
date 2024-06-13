@@ -3,8 +3,9 @@
 <?php
 $footer_layout = get_theme_mod('ajaxinwp_footer_layout', 'd-block');
 ?>
+<div class="footer container text-muted">
     <footer id="colophon" class="site-footer <?php echo esc_attr($footer_layout); ?>" role="contentinfo">
-        <div class="site-info row">
+        <div class="site-info row justify-content-center">
             <?php
             $footer_text = get_theme_mod('ajaxinwp_footer_text', '');
             if (!empty($footer_text)) {
@@ -19,6 +20,7 @@ $footer_layout = get_theme_mod('ajaxinwp_footer_layout', 'd-block');
             </span>
         </div><!-- .site-info -->
     </footer><!-- #colophon -->
+</div><!-- .card-footer -->
 
 <?php wp_footer(); ?>
 

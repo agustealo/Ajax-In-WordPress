@@ -2,7 +2,6 @@
 /**
  * The header for our theme.
  */
-
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?> data-theme="<?php echo esc_attr(get_theme_mod('ajaxinwp_color_scheme', 'color')); ?>">
@@ -17,13 +16,10 @@
 </head>
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
-    <?php
-    $nav_layout = get_theme_mod('ajaxinwp_navigation_layout', 'container');
-    $nav_position = get_theme_mod('ajaxinwp_navigation_position', 'position-fixed');
-    ?>
+    
     <div class="row">
-        <nav class="<?php echo esc_attr($nav_position); ?> navbar navbar-expand-md shadow-sm" aria-label="Main navigation">
-            <div class="<?php echo esc_attr($nav_layout); ?>">
+        <nav class="navbar" aria-label="Main navigation">
+            <div class="container">
                 <?php
                 // Display the custom logo or the site title as a fallback
                 if (has_custom_logo()) {
@@ -34,10 +30,14 @@
                     echo '<a class="navbar-brand homepage-title-link" href="' . esc_url(home_url('/')) . '">' . esc_html(get_bloginfo('name')) . '</a>';
                 }
                 ?>
+                
+                <!-- Navbar toggle button for mobile view -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="<?php esc_attr_e('Toggle navigation', 'ajaxinwp'); ?>">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                
                 <?php
+                // Display the primary navigation menu
                 wp_nav_menu(array(
                     'theme_location' => 'primary',
                     'depth' => 2, // 1 = no dropdowns, 2 = with dropdowns.
@@ -52,15 +52,18 @@
             </div>
         </nav>
     </div>
+    
     <header id="masthead" class="site-header" role="banner">
-    <div id="header-hero-container">
-        <?php if (!is_singular() && is_active_sidebar('ajaxinwp_widget_area_header1')) : ?>
-        <div class="container-fluid px-0">
-            <?php 
-            // Get Hero header
-            get_template_part('partials/partials-header-hero');
-            ?>
+        <div id="header-hero-container">
+            <?php if (!is_singular() && is_active_sidebar('ajaxinwp_widget_area_header1')) : ?>
+                <div class="container-fluid">
+                    <?php 
+                    // Include the hero header partial template
+                    get_template_part('partials/partials-header-hero');
+                    ?>
+                </div>
+            <?php endif; ?>
         </div>
-        <?php endif; ?>
-    </div>
-</header>
+    </header>
+</body>
+</html>
