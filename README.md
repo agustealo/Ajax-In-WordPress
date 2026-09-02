@@ -1,8 +1,25 @@
 # AjaxInWP Engine
 
-AjaxInWP Engine is a classic WordPress theme that demonstrates **progressive, fetch-powered navigation** without replacing WordPress as the source of routing or rendered content.
+**Modern AJAX navigation for WordPress using the Fetch API, progressive enhancement, PHP, Bootstrap, and server-rendered WordPress templates.**
 
-Normal links still work as normal links. When JavaScript is available, same-origin page navigations are fetched in the background, the next page's `#ajax-container` is swapped into the current document, browser history is updated, and focus is moved to the new content. If anything goes wrong, navigation falls back to a normal page load.
+AjaxInWP Engine is a classic **WordPress AJAX theme** and developer reference for building **SPA-like WordPress navigation without turning WordPress into a JavaScript-only SPA**. It uses the browser **Fetch API**, `AbortController`, `DOMParser`, the History API, accessible focus management, and normal WordPress PHP templates to provide fast page transitions while preserving canonical URLs, SEO-friendly server rendering, browser back/forward behavior, and no-JavaScript fallback.
+
+If you are searching for examples of **AJAX in WordPress**, **WordPress fetch navigation**, **WordPress AJAX page transitions**, **progressive enhancement in WordPress**, **PHP WordPress themes**, or **JavaScript navigation without jQuery**, this repository is designed as a compact, production-minded reference implementation.
+
+## What this project demonstrates
+
+- AJAX-style WordPress navigation with the native JavaScript Fetch API
+- progressive enhancement over normal WordPress links and routes
+- SPA-like page transitions without a client-side router
+- server-rendered, crawlable WordPress HTML
+- `history.pushState()` and browser back/forward navigation
+- abortable requests with `AbortController`
+- accessible focus and `aria-busy` state management
+- reduced-motion-aware scrolling
+- PHP 8+ WordPress theme development
+- Bootstrap 5 integration without a jQuery navigation dependency
+- WordPress theme structure, sidebars, widgets, menus, and template parts
+- GitHub Actions validation for PHP and JavaScript
 
 ## Requirements
 
@@ -136,6 +153,10 @@ The v2 runtime:
 - repairs invalid header/footer document boundaries
 - repairs sidebar and partial-template ownership
 - updates theme compatibility metadata and documentation
+
+## Related search terms
+
+`wordpress ajax` · `ajax wordpress theme` · `wordpress fetch api` · `wordpress ajax navigation` · `wordpress page transitions` · `wordpress spa navigation` · `progressive enhancement wordpress` · `wordpress php theme` · `wordpress javascript` · `fetch api wordpress` · `history api wordpress` · `abortcontroller wordpress` · `bootstrap wordpress theme` · `wordpress without jquery`
 
 ## Contributing
 
