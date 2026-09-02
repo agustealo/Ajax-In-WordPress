@@ -143,4 +143,4 @@ See `CONTRIBUTING.md`.
 
 ## License
 
-AjaxInWP Engine is licensed under the **GNU General Public License v2 or later**, matching the repository `LICENSE` file and the WordPress theme header.
+AjaxInWP Engine is licensed under the **GNU General Public License v3**, matching the repository `LICENSE` file and the WordPress theme header.
