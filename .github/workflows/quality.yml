@@ -84,7 +84,8 @@ jobs:
           grep -q "Requires at least: 6.9" style.css
           grep -q "Tested up to: 7.1" style.css
           grep -q "Requires PHP: 8.0" style.css
-          grep -q "GNU General Public License v3" LICENSE
+          grep -q "License: GNU General Public License v3" style.css
+          grep -q "Version 3, 29 June 2007" LICENSE
           grep -q "GNU General Public License v3" README.md
 
       - name: Check whitespace
