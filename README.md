@@ -6,7 +6,8 @@ Normal links still work as normal links. When JavaScript is available, same-orig
 
 ## Requirements
 
-- WordPress 6.3+
+- WordPress 6.9+
+- Tested with the current WordPress 7.1 release line
 - PHP 8.0+
 - A modern browser with `fetch`, `AbortController`, and `DOMParser`
 
@@ -67,6 +68,7 @@ JavaScript is enqueued with WordPress' deferred loading strategy. The navigation
 
 ```text
 Ajax-In-WordPress/
+├── .github/workflows/quality.yml
 ├── assets/
 │   ├── css/
 │   ├── img/
@@ -82,6 +84,7 @@ Ajax-In-WordPress/
 ├── functions.php
 ├── header.php
 ├── index.php
+├── sidebar.php
 ├── single.php
 └── style.css
 ```
@@ -92,6 +95,7 @@ Ajax-In-WordPress/
 2. Place the theme directory under `wp-content/themes/` or upload a ZIP through **Appearance → Themes → Add New → Upload Theme**.
 3. Activate **AjaxInWP Engine**.
 4. Assign a menu to the **Primary Menu** location.
+5. Configure the optional sidebar and widget areas under **Appearance → Widgets**.
 
 For development, enable WordPress debugging in a non-production environment and run the repository quality checks before opening a pull request.
 
@@ -109,10 +113,13 @@ The fetch layer performs public GET navigation and does not treat a WordPress no
 
 GitHub Actions runs repository validation on pushes and pull requests. The gate checks:
 
-- PHP syntax for every tracked PHP file
+- PHP syntax on PHP 8.0 and PHP 8.3
 - JavaScript syntax for `assets/js/ajaxinwp.js`
 - absence of the removed duplicate AJAX router
 - presence of the progressive-navigation fallback contract
+- valid document ownership between `header.php` and `footer.php`
+- required sidebar/template wiring
+- current WordPress compatibility metadata
 - whitespace errors
 
 ## Version 2 modernization
@@ -126,6 +133,8 @@ The v2 runtime:
 - preserves normal navigation as the failure fallback
 - keeps WordPress server rendering authoritative
 - removes redundant image regeneration during attachment metadata generation
+- repairs invalid header/footer document boundaries
+- repairs sidebar and partial-template ownership
 - updates theme compatibility metadata and documentation
 
 ## Contributing
