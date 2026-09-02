@@ -1,12 +1,15 @@
 /*
 Theme Name: AjaxInWP Engine
-Theme URI: http://github.com/ajax-in-wordpress
+Theme URI: https://github.com/agustealo/Ajax-In-WordPress
 Author: Zeus Eternal (Agustealo)
-Author URI: http://agustealo.com
-Description: AjaxinWP (Ajax In WordPress) is a cutting-edge WordPress theme developed by Zeus Eternal, designed to revolutionize user experience with seamless navigation and dynamic content loading. Leveraging the power of AJAX and the WordPress REST API, AjaxinWP delivers content instantly without full page reloads, enhancing site performance and user engagement. This theme is meticulously crafted to ensure it adheres to the highest standards of SEO friendliness and accessibility, making it a robust choice for websites aiming for top-notch usability and search engine visibility. Object-oriented JavaScript practices underpin the AJAX functionality, offering a solid, maintainable codebase. AjaxinWP is the ultimate solution for webmasters seeking a modern, efficient, and user-centric website theme.
-Version: 1.0
-License: GNU General Public License v2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Author URI: https://agustealo.com/
+Description: A classic WordPress theme demonstrating progressive, fetch-powered navigation while keeping normal WordPress URLs, server rendering, accessibility, and browser history authoritative.
+Version: 2.0.0
+Requires at least: 6.9
+Tested up to: 7.1
+Requires PHP: 8.0
+License: GNU General Public License v3
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Text Domain: ajaxinwp
-Tags: ajax, dynamic-content, rest-api, seo-friendly, accessibility, modern, performance
+Tags: accessibility, blog, custom-logo, custom-menu, featured-images, responsive-layout
 */
