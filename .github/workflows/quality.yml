@@ -41,6 +41,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -50,22 +52,47 @@ jobs:
       - name: Check JavaScript syntax
         run: node --check assets/js/ajaxinwp.js
 
-      - name: Assert navigation contracts
+      - name: Assert modern theme contracts
         shell: bash
         run: |
           set -euo pipefail
+
           test ! -e inc/ajax-redirect.php
+          test ! -e partials/partials-footer.php
+          test ! -e partials/partials-sidebar.php
+          test -f sidebar.php
+
           ! grep -q "require_once.*ajax-redirect.php" functions.php
-          ! grep -q "wp_enqueue_script('jquery')" functions.php
+          ! grep -q "wp_enqueue_script.*jquery" functions.php
           ! grep -q "ajaxinwp_handle_ajax_requests" functions.php
           ! grep -q "wp_generate_attachment_metadata" functions.php
+          ! grep -q "</body>" header.php
+          ! grep -q "</html>" header.php
+          grep -q "wp_footer();" footer.php
+          grep -q "</body>" footer.php
+          grep -q "</html>" footer.php
+
           grep -q "AbortController" assets/js/ajaxinwp.js
           grep -q "window.location.assign" assets/js/ajaxinwp.js
+          grep -q "credentials: 'same-origin'" assets/js/ajaxinwp.js
           grep -q "#ajax-container" assets/js/ajaxinwp.js
           grep -q "id=\"ajax-container\"" index.php
-          grep -q "Requires at least: 6.3" style.css
+          grep -q "id=\"ajax-container\"" single.php
+          grep -q "get_template_part( 'partials/partials-widgets' )" single.php
+          grep -q "dynamic_sidebar( 'sidebar-1' )" sidebar.php
+
+          grep -q "Requires at least: 6.9" style.css
+          grep -q "Tested up to: 7.1" style.css
           grep -q "Requires PHP: 8.0" style.css
-          grep -q "GNU General Public License v2 or later" README.md
+          grep -q "GNU General Public License v3" LICENSE
+          grep -q "GNU General Public License v3" README.md
 
       - name: Check whitespace
-        run: git diff --check HEAD^
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            git diff --check "${{ github.event.pull_request.base.sha }}" HEAD
+          else
+            git diff --check HEAD^
+          fi
